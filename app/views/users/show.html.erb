@@ -1,0 +1,23 @@
+<div class="wrapper"> 
+  <div class="row">
+    <div class="col col-md-2 xs-3">
+      <img class="media-object img-rounded img-responsive" src="<%= gravatar_url(@user, { size: 300 }) %>" alt="">
+    </div>
+    <div class="col col-xs-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= @user.name %></h3>
+        </div>
+        <div class="panel-body">
+          <p>ポイント：<%= @user.point %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-xs-8">
+      <div class="exhibitors">出品した本一覧</div>
+    </div>
+  </div>
+  <%= render "books/books", books: @books %>
+</div>

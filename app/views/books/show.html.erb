@@ -1,0 +1,18 @@
+<div class="row">
+  <aside class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <%= image_tag @book.image.thumb.url, alt:  "", class: "media-object img-rounded img-responsive" if @book.image.present? %>
+      </div>
+      <div class="panel-body">
+        <div class="book_user"><%= link_to @user.name  , user_path(@user) %></div>
+      </div>
+    </div>
+  </aside>
+  <div class="col-xs-8">
+    <p>コメント：</p><br>
+    <div class="book-expalin">
+      <%= @book.explain %>
+    </div>
+  </div>
+</div>

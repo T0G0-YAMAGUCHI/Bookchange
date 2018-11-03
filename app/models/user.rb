@@ -1,11 +1,16 @@
 class User < ApplicationRecord
-  before_action { self.email.downcase!}
+  before_save { self.email.downcase!}
   validates :name , presence: true , length:{maximum:30}
-  validates :emamil ,  presence: true, length: { maximum: 255 },
+  validates :email , presence: true, length:{maximum:50} ,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }
   
-  validates :point , presence: true 
+  validates :point , presence: true
+  
+  has_many :books
+  
+  has_many :orders
+  has_many :products , through: :orders , source: :book
   
   has_secure_password
 end

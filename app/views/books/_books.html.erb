@@ -1,0 +1,20 @@
+<% if books %>
+  <div class="row">
+    <% books.each do |book| %>
+      <%= link_to(book_path(book)) do %>    
+        <div class="book">
+          <div class="col-md-3 col-sm-4 col-xs-6">
+            <div class="panel panel-default">
+              <div class="panel-heading text-center">
+                 <%=image_tag  book.image.url,alt:"" ,class:"media-object img-rounded img-responsive" if book.image.present? %>
+              </div>
+              <div class="panel-body">
+                <%= book.title %>
+              </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+<% end %>
