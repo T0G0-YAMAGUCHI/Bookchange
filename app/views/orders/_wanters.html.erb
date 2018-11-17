@@ -1,0 +1,11 @@
+<h3>リクエスト一覧</h3>
+<% users.each do |user| %>
+  <div class="requests">
+    <img src="<%= gravatar_url(user, { size: 20 }) %>" alt="" class="img-circle"><%=link_to  user.name , user_path(user) %></h4>
+    <% if @book.order_id.blank? && current_user == @book.user %>
+      <%= link_to "決める", book_sets_path(@book, user_id: user.id), method: :post , class:"btn decide btn-primary" %>   
+    <% elsif user.orders.find_by(book_id: @book.id).id == @book.order_id && current_user == @book.user%>
+      <%= link_to "解除", book_removes_path(@book), method: :delete , class:"btn decide btn-success" %>
+    <% end %>
+  </div>
+<% end %>

@@ -5,14 +5,38 @@
         <%= image_tag @book.image.thumb.url, alt:  "", class: "media-object img-rounded img-responsive" if @book.image.present? %>
       </div>
       <div class="panel-body">
-        <div class="book_user"><%= link_to @user.name  , user_path(@user) %></div>
+        <div class="book_user">出品者：<%= link_to @user.name  , user_path(@user) %></div>
       </div>
     </div>
+    <%= render "orders/wanters" , users: @wanters %>
   </aside>
   <div class="col-xs-8">
+    <h1><%= @book.title %></h1>
     <p>コメント：</p><br>
     <div class="book-expalin">
       <%= @book.explain %>
     </div>
+    <% if current_user.point >= 1 && current_user != @book.user %>
+      <%= render "want_button" ,book: @book %>
+    <% end %>
+    <% if @book.order_id.present? && Order.find(@book.order_id).user == current_user || @book.order_id.present? && @book.user == current_user %>
+      <%= render "messages/messages" , messages: @messages %>
+      <%= form_for(@message) do |f| %>
+        <div class="form-group">
+         <%= hidden_field_tag :book_id , @book.id %>
+         <%= hidden_field_tag :user_id , current_user.id %>
+         <%= f.text_area :content, class: 'form-control', rows: 5 %>
+        </div>
+        <%= f.submit '送信', class: 'btn btn-primary btn-block' %>
+      <% end %>
+      <% if @book.order_id.present? && Order.find(@book.order_id).user == current_user %>
+        <%= form_for(@order) do |f| %>
+          <%= hidden_field_tag :check , true %>
+          <%= f.submit "配達済み" , class:"btn  check btn-success" %>
+        <% end %>
+      <% end %>
+    <% elsif @book.order_id.present? && Order.find(@book.order_id).user != current_user && current_user != @book.user %>
+      <p class="sorry">他の人に決まってしまいました・・・</p>
+    <% end %>
   </div>
 </div>

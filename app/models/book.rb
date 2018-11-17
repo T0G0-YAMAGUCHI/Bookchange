@@ -1,16 +1,14 @@
 class Book < ApplicationRecord
-  validates :title , presence: true ,length:{maximum:30}
-  mount_uploader  :image, ImageUploader
+  validates :title, presence: true ,length:{maximum:30}
+  validates :explain, presence: true , length:{maximum:255}
+  mount_uploader :image, ImageUploader
+  
   belongs_to :user
+  belongs_to :order, optional: true
   
-  def self.search(search)
-    if search
-      Book.where(["title LIKE?" , "%#{search}%" ])
-    else
-      Book.all
-    end
-  end
+  has_many :orders 
+  has_many :wanters, through: :orders , source: :user 
   
-  has_many :reverces_of_orders , class_name:"Order" , foreign_key:"user_id"
-
+  has_many :messages, dependent: :destroy
+  
 end

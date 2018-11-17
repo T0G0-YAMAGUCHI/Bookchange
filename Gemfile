@@ -55,3 +55,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "carrierwave"
 gem 'kaminari', '~> 0.17.0'
 gem 'rmagick'
+gem "ransack"
+gem 'pry-byebug', group: :development

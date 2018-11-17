@@ -30,6 +30,10 @@
                 </li>
                 <li role="separator" class="divider"></li>
                 <li><%= link_to "ログアウト" , logout_path, method: :delete %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "購入履歴" , purchased_books_path(current_user) %></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to "リクエスト中" , want_books_path(current_user) %></li>
               </ul>
             </li>
           </ul>

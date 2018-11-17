@@ -1,6 +1,7 @@
-<% if books %>
+<h1>リクエスト中の本一覧</h1>
+<% if @want_books %>
   <div class="row">
-    <% books.each do |book| %>
+    <% @want_books.each do |book| %>
       <%= link_to(book_path(book)) do %>    
         <div class="book">
           <div class="col-md-3 col-sm-4 col-xs-6">
@@ -14,7 +15,7 @@
             </div>
           </div>
         </div>
-      <% end %>
+     <% end %>
     <% end %>
   </div>
 <% end %>

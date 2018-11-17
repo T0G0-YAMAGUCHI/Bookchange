@@ -1,0 +1,11 @@
+<% if current_user.want?(book) %>
+  <%= form_tag(order_path(book.id), method: :delete) do %>
+    <%= hidden_field_tag :book_id, book.id %>
+    <%= submit_tag 'リクエストを解除する', class: 'btn unwant btn-success' %>
+  <% end %>
+<% else %>
+  <%= form_tag(orders_path) do %>
+    <%= hidden_field_tag :book_id, book.id %>
+    <%= submit_tag 'リクエストする', class: 'btn want btn-primary' %>
+  <% end %>
+<% end %>
